@@ -21,7 +21,7 @@ public class UserLogin {
 				else {
 					System.out.println("the id or password you entered is incorrect. Please try again");
 					System.out.println("you have attempted "+numberOfAttempts+" out of 3");
-					numberOfAttempts+=1;
+					numberOfAttempts++;
 				}
 		}
 		if(numberOfAttempts>=3)

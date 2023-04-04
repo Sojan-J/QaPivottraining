@@ -7,8 +7,8 @@ public class assignmentmarch29Main {
 		
 		Banking bank=new Banking();
 		bank.actualPin=3434;
-		bank.balanceAmount=1000;
-		bank.overdraftAmount=2000;
+		bank.balanceAmount=500;
+		bank.overdraftAmount=1000;
 		bank.withdrawCash();
 
 	}

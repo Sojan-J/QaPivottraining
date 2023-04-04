@@ -1,7 +1,7 @@
 package gitExample;
 
 public class GitExample2 {
-	void gitExample()
+	void gitExampleTrials()
 	{
 		System.out.println("trials..... git");
 	}

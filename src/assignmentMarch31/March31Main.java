@@ -6,9 +6,9 @@ public class March31Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//*************water tank***********
-		/*WaterTank tank=new WaterTank();
-		tank.currentWater=70;
-		tank.TankFilling();*/
+		WaterTank tank=new WaterTank();
+		tank.currentWater=9.9;
+		tank.TankFilling();
 		
 		//***************prime number*************
 		/*PrimeNumber prime= new PrimeNumber();
@@ -19,7 +19,7 @@ public class March31Main {
 		
 		//***********Chocolate Box************
 		/*ChocolateBox box=new ChocolateBox();
-		box.currentBoxLevel=50;
+		box.currentBoxLevel=60;
 		box.addChocolate();*/
 		
 		// **********Login functionality*********
@@ -27,10 +27,10 @@ public class March31Main {
 		login.loginFunction();*/
 		
 		//**********Calculator*********
-		Calculator cal=new Calculator();
+		/*Calculator cal=new Calculator();
 		String operation;
 		Scanner input =new Scanner(System.in);
-		System.out.println("Please enter your prefered operator: add, product, difference, divide, square or cube");
+		System.out.println("Please enter your preferred operator: add, product, difference, divide, square or cube");
 		operation=input.nextLine();
 		switch (operation) {
 		case "add":
@@ -54,7 +54,7 @@ public class March31Main {
 			default:
 				System.out.println("unrecognized operation");
 				break;
-		}
+		}*/
 		
 }
 }

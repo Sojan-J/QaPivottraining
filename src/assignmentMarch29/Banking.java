@@ -1,5 +1,5 @@
 package assignmentMarch29;
-import java.util.Scanner;//???????
+import java.util.Scanner;  //???????
 public class Banking {
 	int actualPin;
 	int enteredPin;
@@ -24,10 +24,10 @@ public class Banking {
 			}else
 				if(numberOfAttempt>=3) {
 					System.out.println("Your card is now blocked. please contact Customer Service");
-				
+				break;
 				}else {
 					System.out.println("The pin you entered is incorrect");
-					System.out.println("Attention!!! you have attempted 3 out of  "+ numberOfAttempt);
+					System.out.println("Attention!!! you have attempted"+ numberOfAttempt+" out of  3" );
 					numberOfAttempt++;
 				}
 		}
@@ -41,11 +41,7 @@ public class Banking {
 			}
 			else {
 				System.out.println("you dont have enough balance");
-			}
-			
-			
+			}	
 		}
 	}
-	
-
 }
