@@ -2,19 +2,54 @@ package hangmanGame;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class GuesStudentGame {
-	String[] studentTitle = { "Aleena", "Angel", "Asha", "Clemin", "Gopesh", "Hamneet", "Jimna", "Jobin", "Jude",
-			"Kamaldeep", "Manpreets", "Manpreetp", "Mariya", "Namitha", "Neelam", "Nisha", "Parminder", "Rajat", "Rojy",
-			"Sojan", "Suchitra", "Vindhuja" };
-
 	Scanner sc = new Scanner(System.in);
 	char guess;
+	char previousLetter;
+	char[] numberOfLettersEntered = new char[26];
 
-	String getRandomTitle() {
-		Random rand = new Random();
-		int randomIndex = rand.nextInt(studentTitle.length);
-		return studentTitle[randomIndex];
+	String getRandomName() throws IOException {
+		int count = 0;
+		int numberOfLine = 0;
+		String randomName = null;
+		FileReader fr1 = new FileReader("W:\\QAPivotTrainingMarch2023-Sept2023\\fileReader\\studentList.txt");
+		BufferedReader br1 = new BufferedReader(fr1);
+		while (br1.readLine() != null) {
+			numberOfLine++;
+		}
+		br1.close();
+		Random getRandom = new Random();
+		int randomLine = getRandom.nextInt(numberOfLine);
+		FileReader fr2 = new FileReader("W:\\QAPivotTrainingMarch2023-Sept2023\\fileReader\\studentList.txt");
+		BufferedReader br2 = new BufferedReader(fr2);
+		while (br2.readLine() != null) {
+			if (count == randomLine) {
+				randomName = br2.readLine();
+			}
+			count++;
+		}
+		return randomName;
+	}
+
+	void populateNumberOfletters(char letter, int current) {
+		numberOfLettersEntered[current] = letter;
+	}
+
+	boolean checkIfLetterRepeated(char letter, int current) {
+		boolean flaged = false;
+		for (int i = 0; i <= current; i++) {
+			if (numberOfLettersEntered[i] == letter) {
+				flaged = true;
+				break;
+			}
+		}
+		return flaged;
 	}
 
 	void populateWrongLettersArr(int wrong, char[] wrongLetters, char letter) {
@@ -49,30 +84,19 @@ public class GuesStudentGame {
 		return randomArray;
 	}
 
-	void removeTheMatchedChar(char[] randomArray, char letter) {
-		for (int i = 0; i < randomArray.length; i++) {
-			if (randomArray[i] == letter) {
-				randomArray[i] = '$';
-				break;
-			}
-		}
-	}
-
-	void updateUnderScore(char[] underScore, char[] randomArray, char letter) {
+	void updateUnderScore(char[] underScore, char[] random, char letter) {
 		for (int i = 0; i < underScore.length; i++) {
-			if (randomArray[i] == letter) {
+			if (random[i] == letter) {
 				underScore[i] = letter;
-				break;
 			}
 		}
 	}
 
-	boolean verifyTheCharacter(char[] randomArray, char letter) {
+	boolean verifyTheCharacter(char[] random, char letter) {
 		boolean match = false;
-		for (int i = 0; i < randomArray.length; i++) {
-			if (randomArray[i] == letter) {
+		for (int i = 0; i < random.length; i++) {
+			if (random[i] == letter) {
 				match = true;
-				break;
 			}
 		}
 		return match;
@@ -87,7 +111,7 @@ public class GuesStudentGame {
 		}
 		System.out.println();
 		System.out.println("       ");
-		System.out.print("You guessed " + correct);
+		System.out.print("You guessed " + wrong);
 		System.out.print("  wrong letters ");
 		for (int j = 0; j < wrong; j++) {
 			System.out.print(wrongLetter[j] + ",");
@@ -96,6 +120,17 @@ public class GuesStudentGame {
 		System.out.println("Guess a letter: ");
 		guess = sc.next().charAt(0);
 		return guess;
+	}
+
+	boolean checkIfWordComplete(char[] underScore, char[] random) {
+		boolean wordComplete = false;
+		for (int i = 0; i < underScore.length; i++) {
+			if (underScore[i] != random[i]) {
+				wordComplete = true;
+			}
+
+		}
+		return wordComplete;
 	}
 
 }
