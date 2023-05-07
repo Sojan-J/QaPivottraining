@@ -7,7 +7,6 @@ public class BankinPersonalDetails {
 	private double accountBalance;
 	private String passWord;
 	private String username;
-	
 
 	public BankinPersonalDetails(String customerName, String customerAccountNo, int atmPin, double accountBalance,
 			String passWord, String username) {

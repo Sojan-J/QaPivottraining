@@ -2,12 +2,15 @@ package bankOperationAssignment;
 
 import java.util.*;
 
-public class BankOperation {
+public abstract class BankOperation {
 
 	BankinPersonalDetails customer = new BankinPersonalDetails("Jackson", "1239063456", 4545, 6000.0, "JACKSON",
 			"Jackson100");
 	private double accountBalance = customer.getAccountBalance();
 	Scanner sc = new Scanner(System.in);
+
+	protected abstract void changePinPassword();
+	protected abstract void  atmOnlineOperation();
 
 	protected boolean checkIfPinEnteredCorrect() {
 		int enteredPin = 0;
@@ -16,10 +19,9 @@ public class BankOperation {
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Enrer your pin");
 			enteredPin = sc.nextInt();
-			;
+
 			if (customer.getAtmPin() == enteredPin) {
 				flag = true;
-				sc.close();
 				break;
 			} else {
 				count++;
@@ -27,13 +29,10 @@ public class BankOperation {
 			}
 			if (count > 3) {
 				System.out.println("Your pin is blocked");
-				sc.close();
 				break;
 			}
-
 		}
 		return flag;
-
 	}
 
 	protected boolean checkIfPassAndUserNameCorrect() {
