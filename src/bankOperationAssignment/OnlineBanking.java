@@ -4,10 +4,9 @@ import java.util.Scanner;
 
 public class OnlineBanking extends BankOperation {
 
-	private double accountBalance = customer.getAccountBalance();
 	Scanner sc = new Scanner(System.in);
 
-	protected void changePinPassword() {
+	protected void changePinPassword(PersonalDetails customer) {
 		String oldPassword = customer.getPassWord();
 		String newPassWord = null;
 		int count = 1;
@@ -31,41 +30,9 @@ public class OnlineBanking extends BankOperation {
 		}
 	}
 
-	protected void atmOnlineOperation() {
-		String service = null;
-		double deposit = 0;
-
-		if (checkIfPassAndUserNameCorrect()) {
-			System.out.println("View account -enter 1");
-			System.out.println("Deposit cheq- enter 2");
-			System.out.println("Change password-enter 3");
-			service = sc.nextLine();
-			switch (service) {
-			case "1":
-				viewBalance();
-				break;
-			case "2":
-				System.out.println("enter cheq amount:");
-				deposit = sc.nextDouble();
-				depisiteCheq(deposit);
-				System.out.println("your cheq is being deposited");
-				viewBalance();
-				break;
-			case "3":
-				changePinPassword();
-				break;
-			default:
-				System.out.println("service not available");
-				break;
-			}
-
-		} else
-			System.out.println("incorrect user name or password");
-	}
-
 	@Override
-	protected void depisiteCheq(double cheqAmount) {
-		customer.setAccountBalance(accountBalance + cheqAmount);
+	protected void depisiteCheq(double cheqAmount, PersonalDetails customer) {
+		customer.setAccountBalance(customer.getAccountBalance() + cheqAmount);
 	}
 
 }

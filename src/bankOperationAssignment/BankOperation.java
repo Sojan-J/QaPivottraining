@@ -4,15 +4,13 @@ import java.util.*;
 
 public abstract class BankOperation {
 
-	BankinPersonalDetails customer = new BankinPersonalDetails("Jackson", "1239063456", 4545, 6000.0, "JACKSON",
-			"Jackson100");
-	private double accountBalance = customer.getAccountBalance();
+	
+
 	Scanner sc = new Scanner(System.in);
 
-	protected abstract void changePinPassword();
-	protected abstract void  atmOnlineOperation();
+	protected abstract void changePinPassword(PersonalDetails customer);
 
-	protected boolean checkIfPinEnteredCorrect() {
+	protected boolean checkIfPinEnteredCorrect(PersonalDetails customer) {
 		int enteredPin = 0;
 		int count = 1;
 		boolean flag = false;
@@ -35,7 +33,7 @@ public abstract class BankOperation {
 		return flag;
 	}
 
-	protected boolean checkIfPassAndUserNameCorrect() {
+	protected boolean checkIfPassAndUserNameCorrect(PersonalDetails customer) {
 		boolean flag = false;
 		int count = 1;
 		String enteredPassWord = null;
@@ -61,24 +59,26 @@ public abstract class BankOperation {
 		return flag;
 	}
 
-	protected void withdrawCash(int withdrawAmount) {
-		if ((accountBalance - withdrawAmount) >= 0) {
-			customer.setAccountBalance(accountBalance - withdrawAmount);
-		}
+	protected void withdrawCash(int withdrawAmount, PersonalDetails customer) {
+		if ((customer.getAccountBalance() - withdrawAmount) >= 0) {
+			customer.setAccountBalance(customer.getAccountBalance() - withdrawAmount);
+		}else
+			System.out.println("not enough balance");
 	}
 
-	protected void depositCash(double depositAmount) {
-		customer.setAccountBalance(accountBalance + depositAmount);
+	protected void depositCash(double depositAmount,PersonalDetails customer) {
+		customer.setAccountBalance(customer.getAccountBalance() + depositAmount);
 	}
 
-	protected void depisiteCheq(double cheqAmount) {
+	protected void depisiteCheq(double cheqAmount,PersonalDetails customer) {
 		int cheqFee = 2;
-		customer.setAccountBalance((accountBalance + cheqAmount) - cheqFee);
+		customer.setAccountBalance((customer.getAccountBalance()+ cheqAmount) - cheqFee);
 	}
 
-	protected void viewBalance() {
+	protected void viewBalance(PersonalDetails customer) {
 		System.out.println("Customer Name : " + customer.getCustomerName());
-		System.out.println("Customer Account Number: " + "***********"
+		System.out.println(
+				"Customer Account Number: " + "***********"
 				+ customer.getCustomerAccountNo().substring(customer.getCustomerAccountNo().length() - 4));
 		System.out.println("Current balance: " + customer.getAccountBalance());
 
